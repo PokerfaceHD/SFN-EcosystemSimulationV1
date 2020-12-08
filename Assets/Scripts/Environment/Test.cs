@@ -23,7 +23,6 @@ public class Test : MonoBehaviour {
                 point3D.x = point.x - regionSize.x/2;
                 point3D.z = point.y - regionSize.y/2;
                 Instantiate(food, point3D, new Quaternion(0,0,0,0));
-				print("lul");
 			}
 		}
 	}

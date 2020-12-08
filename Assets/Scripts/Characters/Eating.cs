@@ -20,35 +20,36 @@ public class Eating : MonoBehaviour
     Vector3 closestDirection;
     public Rigidbody rb;
     public float detectionRange = 30;
+    float timeTillNextHungerReduction;
+    public float secondsUntilHungerReduction = 1;
     void Update()
     {
         if (hunger > 100)
         {
             hunger = 100;
-            Instantiate(this, transform.position + new Vector3(Random.Range(-1,1), 0, Random.Range(-1, 1)), new Quaternion(0,0,0,0));
+            Instantiate(this, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), new Quaternion(0, 0, 0, 0));
         }
-        if (closestDirection.magnitude > detectionRange)
+        if(closestDirection.magnitude > 10 && closest != null)
         {
-            moveDirection = (closest.transform.position - transform.position).normalized;
+            moveDirection = closestDirection.normalized;
         }
-        else
+        if (timeTillNextHungerReduction < Time.time)
         {
-            Vector3 randomDirection = new Vector3(Random.Range(-100f, 100f), 0f, Random.Range(-100f, 100f));
-            moveDirection = randomDirection.normalized;
+            timeTillNextHungerReduction = secondsUntilHungerReduction + Time.time;
+            hunger--;
         }
         if (timeToNextFoodFind < Time.time)
         {
             timeToNextFoodFind = Time.time + foodFindingCooldown;
             if (hunger > 0)
             {
-
-                if (meat)
-                {
-                    gos = GameObject.FindGameObjectsWithTag("Meat");
-                }
                 if (plant)
                 {
                     gos = GameObject.FindGameObjectsWithTag("Plant");
+                }
+                else
+                {
+                    gos = GameObject.FindGameObjectsWithTag("Meat");
                 }
                 closest = null;
                 float distance = Mathf.Infinity;
@@ -72,11 +73,11 @@ public class Eating : MonoBehaviour
                 }
                 else
                 {
-                    moveDirection = (closest.transform.position - transform.position).normalized;
+                    moveDirection = closestDirection.normalized;
                 }
             }
         }
-        rb.velocity = moveDirection * speed;
+        rb.velocity = new Vector3(moveDirection.x * speed, rb.velocity.y, moveDirection.z * speed);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -86,7 +87,7 @@ public class Eating : MonoBehaviour
             if(collision.collider.tag == "Meat")
             {
                 hunger += 25 * digestionEfficiencyMeat;
-                Destroy(closest);
+                Destroy(collision.collider.gameObject);
             }
         }
         if (plant)
@@ -95,6 +96,7 @@ public class Eating : MonoBehaviour
             {
                 hunger += 15 * digestionEfficiencyPlant;
                 Destroy(collision.collider.gameObject);
+
             }
         }
     }
