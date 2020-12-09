@@ -21,61 +21,85 @@ public class Eating : MonoBehaviour
     public Rigidbody rb;
     public float detectionRange = 30;
     float timeTillNextHungerReduction;
-    public float secondsUntilHungerReduction = 1;
+    public float hungerLossPerSecond = 4;
+    RaycastHit hit;
+    float moveForSoManyTicks;
+    public float addToMoveForSoManyTicks = 50;
+    float x;
+    bool targetAquired;
+    float y = 0;
+    string typeOfFood;
+    void Start()
+    {
+        if (meat)
+        {
+            typeOfFood = "Meat";
+        }
+        else
+        {
+            typeOfFood = "Plant";
+        }
+    }
     void Update()
     {
-        if (hunger > 100)
+        if (meat)
         {
-            hunger = 100;
-            Instantiate(this, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), new Quaternion(0, 0, 0, 0));
-        }
-        if(closestDirection.magnitude > 10 && closest != null)
-        {
-            moveDirection = closestDirection.normalized;
-        }
-        if (timeTillNextHungerReduction < Time.time)
-        {
-            timeTillNextHungerReduction = secondsUntilHungerReduction + Time.time;
-            hunger--;
-        }
-        if (timeToNextFoodFind < Time.time)
-        {
-            timeToNextFoodFind = Time.time + foodFindingCooldown;
-            if (hunger > 0)
+            if (x < Time.time)
             {
-                if (plant)
+                x += Random.Range(0f, 1f) + Time.time;
+                if (Physics.Raycast(transform.position, moveDirection, out hit, 1))
                 {
-                    gos = GameObject.FindGameObjectsWithTag("Plant");
-                }
-                else
-                {
-                    gos = GameObject.FindGameObjectsWithTag("Meat");
-                }
-                closest = null;
-                float distance = Mathf.Infinity;
-                Vector3 position = transform.position;
-                foreach (GameObject go in gos)
-                {
-                    diff = go.transform.position - position;
-                    float curDistance = diff.sqrMagnitude;
-                    if (curDistance < distance)
+                    if (hit.collider.gameObject.tag == "Plant")
                     {
-                        closest = go;
-                        distance = curDistance;
+                        moveForSoManyTicks = addToMoveForSoManyTicks;
                     }
                 }
-                closestDirection = closest.transform.position - transform.position;
-                if ((closest.transform.position - transform.position).magnitude > detectionRange) 
+            }
+        }
+        for (int i = 0; i < moveForSoManyTicks; moveForSoManyTicks--)
+        {
+            transform.position += new Vector3(-moveDirection.z, 0, moveDirection.x).normalized * speed * Time.deltaTime;
+        }
+        if (hunger > 100)
+        {
+            hunger = 75;
+            Instantiate(this, transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f)), new Quaternion(0, 0, 0, 0));
+        }
+        else if (hunger < 0)
+        {
+
+            Destroy(this.gameObject);
+        }
+        hunger -= hungerLossPerSecond * Time.deltaTime;
+        Collider[] gameObjectsInDetectionRange = Physics.OverlapSphere(transform.position, detectionRange);
+        closest = null;
+        float distance = Mathf.Infinity;
+        Vector3 position = transform.position;
+        foreach (Collider gameObject in gameObjectsInDetectionRange)
+        {
+            if (gameObject.gameObject.tag == typeOfFood)
+            {
+                diff = gameObject.gameObject.transform.position - position;
+                float curDistance = diff.sqrMagnitude;
+                if (curDistance < distance)
                 {
-                    Vector3 randomDirection = new Vector3(Random.Range(-100f, 100f), 0f, Random.Range(-100f, 100f));
-                    moveDirection = randomDirection.normalized;
-                    timeToNextFoodFind = Time.time + foodFindingCooldown * 5;
-                }
-                else
-                {
-                    moveDirection = closestDirection.normalized;
+                    closest = gameObject.gameObject;
+                    distance = curDistance;
                 }
             }
+        }  
+        if (closest != null)
+        {
+            closestDirection = closest.transform.position - transform.position;
+            moveDirection = closestDirection.normalized;
+            Debug.DrawLine(transform.position, closest.transform.position);
+        }
+        else if (y < Time.time)
+        {
+            y += 10;
+            Vector3 randomDirection = new Vector3(Random.Range(-100f, 100f), 0f, Random.Range(-100f, 100f));
+            moveDirection = randomDirection.normalized;
+            timeToNextFoodFind = Time.time + foodFindingCooldown * 5;
         }
         rb.velocity = new Vector3(moveDirection.x * speed, rb.velocity.y, moveDirection.z * speed);
     }
@@ -86,8 +110,9 @@ public class Eating : MonoBehaviour
         {
             if(collision.collider.tag == "Meat")
             {
-                hunger += 25 * digestionEfficiencyMeat;
+                hunger += 40 * digestionEfficiencyMeat;
                 Destroy(collision.collider.gameObject);
+                y = 0;
             }
         }
         if (plant)
@@ -96,7 +121,7 @@ public class Eating : MonoBehaviour
             {
                 hunger += 15 * digestionEfficiencyPlant;
                 Destroy(collision.collider.gameObject);
-
+                y = 0;
             }
         }
     }
