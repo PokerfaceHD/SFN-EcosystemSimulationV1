@@ -98,8 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_LightingSettings: {fileID: 4890085278179872738, guid: e100f78e0632aeb4aa39c1d490eff7a2,
-    type: 2}
+  m_LightingSettings: {fileID: 4890085278179872738, guid: e100f78e0632aeb4aa39c1d490eff7a2, type: 2}
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -167,7 +166,6 @@ MeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
   m_MotionVectors: 1
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
@@ -215,7 +213,7 @@ Transform:
   m_GameObject: {fileID: 183337586}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -0.6, z: 0}
-  m_LocalScale: {x: 1000, y: 1, z: 1000}
+  m_LocalScale: {x: 5000, y: 1, z: 5000}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -252,8 +250,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 10
-  regionSize: {x: 1000, y: 1000}
-  rejectionSamples: 40
+  regionSize: {x: 2500, y: 2500}
+  rejectionSamples: 200
   displayRadius: 1
   food: {fileID: 4853531900972503432, guid: 352c9f9bbcf315c449e9108320ed8c90, type: 3}
 --- !u!4 &661021228
@@ -284,10 +282,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawnCooldown: 0.01
   food: {fileID: 4853531900972503432, guid: 352c9f9bbcf315c449e9108320ed8c90, type: 3}
-  MeatEater: {fileID: 4357522879634515134, guid: b48bfea44fef33d4e8681067e934f5c5,
-    type: 3}
-  PlantEater: {fileID: 4337394020509397450, guid: 6713a320befb86c419ba8984e7f6ed41,
-    type: 3}
+  MeatEater: {fileID: 4357522879634515134, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
+  PlantEater: {fileID: 4337394020509397450, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
   test: {fileID: 661021227}
   numberOfPlantEatersSpawnedAtStartup: 100
   numberOfMeatEatersSpawnedAtStartup: 2
@@ -303,8 +299,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f98d5bafe8f3fc84f97d6f758df699bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlantList: []
-  MeatList: []
 --- !u!1 &743969140
 GameObject:
   m_ObjectHideFlags: 0
@@ -363,7 +357,6 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
 --- !u!223 &743969143
 Canvas:
   m_ObjectHideFlags: 0
@@ -667,68 +660,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4337394020509397450, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397450, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_Name
       value: Plant eater
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2.38
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalRotation.w
       value: 0.9985704
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalRotation.y
       value: -0.053453922
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalRotation.z
       value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: -6.128
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397454, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4337394020509397455, guid: 6713a320befb86c419ba8984e7f6ed41,
-        type: 3}
+    - target: {fileID: 4337394020509397455, guid: 6713a320befb86c419ba8984e7f6ed41, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 661021226}
@@ -741,68 +721,55 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalPosition.x
       value: 100
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalPosition.y
       value: 2
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalRotation.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalRotation.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalRotation.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515125, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4357522879634515129, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515129, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: gameManager
       value: 
       objectReference: {fileID: 661021226}
-    - target: {fileID: 4357522879634515134, guid: b48bfea44fef33d4e8681067e934f5c5,
-        type: 3}
+    - target: {fileID: 4357522879634515134, guid: b48bfea44fef33d4e8681067e934f5c5, type: 3}
       propertyPath: m_Name
       value: Meat Eater
       objectReference: {fileID: 0}

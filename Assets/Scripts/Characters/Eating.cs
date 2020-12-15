@@ -26,7 +26,6 @@ public class Eating : MonoBehaviour
     float moveForSoManyTicks;
     public float addToMoveForSoManyTicks = 50;
     float x;
-    bool targetAquired;
     float y = 0;
     string typeOfFood;
     void Start()
